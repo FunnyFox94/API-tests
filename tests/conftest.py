@@ -10,9 +10,14 @@ def courier_generating():
 
 
 @pytest.fixture()
-def new_courier_data():  # создаю юзера руками, что бы проверить регистрацию
+def new_random_courier_data():  # создаю юзера руками, что бы проверить регистрацию
+    new_courier = generate.register_new_courier_and_return_login_password()
+    return new_courier
+
+
+@pytest.fixture()
+def generate_courier_without_required_parameter():
     return {
         "login": f"{generate.generate_random_string()}",
-        "password": f"{generate.generate_random_string()}",
         "firstName": f"{generate.generate_random_string()}"
     }
