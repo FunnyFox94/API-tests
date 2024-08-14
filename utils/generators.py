@@ -1,7 +1,8 @@
 import requests
 import random
 import string
-import sprint_7.utils.urls as url
+import practicum.sprint_7.utils.urls as url
+import practicum.sprint_7.utils.test_literals as json
 
 
 # метод регистрации нового курьера возвращает список из логина и пароля
@@ -45,7 +46,8 @@ def generate_credentials_for_login(credentials):
     return credentials['login'], credentials['password']
 
 
-def user_login(credentials):
+def user_login():
+    credentials = register_new_courier_and_return_login_password()
     login, password = generate_credentials_for_login(credentials)
     payload = {
         "login": login,
@@ -58,3 +60,15 @@ def user_login(credentials):
             "login": login,
             "password": password
         }
+
+
+def generate_courier_data(include_password=True, include_name=True):
+    data = {
+        "login": generate_random_string(),
+        "password": ""
+    }
+    if include_password:
+        data["password"] = generate_random_string()
+    if include_name:
+        data["firstName"] = generate_random_string()
+    return data
